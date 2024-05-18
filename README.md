@@ -6,3 +6,6 @@ Student ID: 1178612
 
 Name: Deepak 
 Student ID: 1173645
+
+Name: Nishant Gautam
+Student ID: 1170101
