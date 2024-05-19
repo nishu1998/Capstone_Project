@@ -39,3 +39,20 @@ Users can submit testimonials about their experience using the app.
 
 4. Search by Genre
 Users can search for manga comics by selecting their preferred genre.
+
+Nishant Gautam
+
+1. Select a Manga by Name
+User search as specific Manga by its Name.
+
+2. User Registration and login.
+User can register on our app and login through his email ID or mobile number.
+
+3. User Favourite list
+User can make his favourite manga list.
+
+4. Auto sliding.
+User can activate auto sliding off Manga Pages while reading.
+
+
+
