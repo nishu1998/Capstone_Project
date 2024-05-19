@@ -12,3 +12,7 @@ Student ID: 1170101
 
 Name: Kiran Kumar Chaudhary
 Student ID: 1143893
+
+Application Name -  MangaMania
+Short description about Application -
+
