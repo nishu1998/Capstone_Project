@@ -56,10 +56,14 @@ User can activate auto sliding off Manga Pages while reading.
 
 Kiran Kumar Chaudhary
 
-1.
-2.
-3.
-4.
+1. Select a Manga by Name
+User search as specific Manga by its Name.
+2. Comic Library
+Users can browse a library of manga comics available in the app.
+3. Push Notifications
+Users receive notifications about new releases, updates, and recommendations. 
+4. Interactive Tutorial
+Users have access to an in-app tutorial for navigating and using the app for the first time.
 
 
 Deepak 
