@@ -54,5 +54,31 @@ User can make his favourite manga list.
 4. Auto sliding.
 User can activate auto sliding off Manga Pages while reading.
 
+Kiran Kumar Chaudhary
+
+1.
+2.
+3.
+4.
+
+
+Deepak 
+
+1.
+2.
+3.
+4.
+
+
+App’s Data Source ---------
+
+The app that sources the API Taken from Website name, Rapid API 
+
+Link to The API -
+https://rapidapi.com/sagararofie/api/mangaverse-api
+
+
+
+
 
 
