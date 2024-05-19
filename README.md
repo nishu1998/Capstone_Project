@@ -16,3 +16,7 @@ Student ID: 1143893
 Application Name -  MangaMania
 Short description about Application -
 
+Welcome to the MangaMania your ultimate destination for reading manga comics on the go! 
+Designed with a user-friendly interface and packed with features, 
+this Android app allows manga enthusiasts to immerse themselves in their favorite stories anytime, 
+anywhere.
