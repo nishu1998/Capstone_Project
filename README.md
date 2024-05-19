@@ -24,9 +24,9 @@ Designed with a user-friendly interface and packed with features,
 this Android app allows manga enthusiasts to immerse themselves in their favorite stories anytime, 
 anywhere.
 
-Features of the Application --------
+Features of the Application ----------------
 
-Amaar Yasir Channa
+Amaar Yasir Channa -----------
 
 1. Bookmark 
 Users can bookmark their favorite manga comics to easily access them later.
@@ -40,7 +40,7 @@ Users can submit testimonials about their experience using the app.
 4. Search by Genre
 Users can search for manga comics by selecting their preferred genre.
 
-Nishant Gautam
+Nishant Gautam ---------------
 
 1. Post notification
 User will get push notification While new updates come.
@@ -54,14 +54,17 @@ User can make his favourite manga list.
 4. Auto sliding.
 User can activate auto sliding off Manga Pages while reading.
 
-Kiran Kumar Chaudhary
+Kiran Kumar Chaudhary ----------------
 
 1. Select a Manga by Name
 User search as specific Manga by its Name.
+
 2. Comic Library
 Users can browse a library of manga comics available in the app.
+
 3. Push Notifications
 Users receive notifications about new releases, updates, and recommendations. 
+
 4. Interactive Tutorial
 Users have access to an in-app tutorial for navigating and using the app for the first time.
 
@@ -74,7 +77,7 @@ Deepak
 4.
 
 
-App’s Data Source ---------
+App’s Data Source -----------------
 
 The app that sources the API Taken from Website name, Rapid API 
 
