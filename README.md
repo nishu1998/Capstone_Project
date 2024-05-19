@@ -42,8 +42,8 @@ Users can search for manga comics by selecting their preferred genre.
 
 Nishant Gautam
 
-1. Select a Manga by Name
-User search as specific Manga by its Name.
+1. Post notification
+User will get push notification While new updates come.
 
 2. User Registration and login.
 User can register on our app and login through his email ID or mobile number.
@@ -76,6 +76,10 @@ The app that sources the API Taken from Website name, Rapid API
 
 Link to The API -
 https://rapidapi.com/sagararofie/api/mangaverse-api
+
+https://rapidapi.com/onextech-solutions-onextech-solutions-default/api/best-manga-anime-wallpapers/
+
+
 
 
 
