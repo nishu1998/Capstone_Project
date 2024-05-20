@@ -69,9 +69,19 @@ Users receive notifications about new releases, updates, and recommendations.
 Users have access to an in-app tutorial for navigating and using the app for the first time.
 
 
-Deepak 
+Deepak ----------------
 
+1. Browse Wallpapers:
+   Users can explore a collection of high-quality wallpapers.
 
+2. Scroll Through Categories:
+   Users can scroll through various categories of wallpapers for easy discovery.
+
+3. Add to Favorites:
+   Users can add wallpapers to their favorites list for quick access.
+
+4. Change App Theme:
+   Users can customize the app's theme to suit their preferences.
 
 App’s Data Source -----------------
 
