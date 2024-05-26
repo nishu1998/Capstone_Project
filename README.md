@@ -28,27 +28,27 @@ Features of the Application ----------------
 
 Amaar Yasir Channa -----------
 
-1. Bookmark 
+1. Bookmark. 
 Users can bookmark their favorite manga comics to easily access them later.
 
-2. Dark Mode
+2. Dark Mode.
 Users can enable dark mode for a better reading experience in low light.
 
-3. User Testimonial
+3. User Testimonial.
 Users can submit testimonials about their experience using the app.
 
-4. Search by Genre
+4. Search by Genre.
 Users can search for manga comics by selecting their preferred genre.
 
 Nishant Gautam ---------------
 
-1. Photo zoom
+1. Photo zoom.
 User can zoom the Manga images.
 
 2. User Registration and login.
 User can register on our app and login through his email ID or mobile number.
 
-3. User Favourite list
+3. User Favourite list.
 User can make his favourite manga list.
 
 4. Auto sliding.
@@ -56,16 +56,16 @@ User can activate auto sliding off Manga Pages while reading.
 
 Kiran Kumar Chaudhary ----------------
 
-1. Select a Manga by Name
+1. Select a Manga by Name.
 User search as specific Manga by its Name.
 
-2. Comic Library
+2. Comic Library.
 Users can browse a library of manga comics available in the app.
 
-3. Push Notifications
+3. Push Notifications.
 Users receive notifications about new releases, updates, and recommendations. 
 
-4. Interactive Tutorial
+4. Interactive Tutorial.
 Users have access to an in-app tutorial for navigating and using the app for the first time.
 
 Deepak ----------------
