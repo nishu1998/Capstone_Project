@@ -42,8 +42,8 @@ Users can search for manga comics by selecting their preferred genre.
 
 Nishant Gautam ---------------
 
-1. Post notification
-User will get push notification While new updates come.
+1. Photo zoom
+User can zoom the Manga images.
 
 2. User Registration and login.
 User can register on our app and login through his email ID or mobile number.
