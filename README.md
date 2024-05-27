@@ -34,8 +34,8 @@ Users can bookmark their favorite manga comics to easily access them later.
 2. Dark Mode.
 Users can enable dark mode for a better reading experience in low light.
 
-3. User Testimonial.
-Users can submit testimonials about their experience using the app.
+3. Latest update.
+User can see latest manga.
 
 4. Search by Genre.
 Users can search for manga comics by selecting their preferred genre.
@@ -48,8 +48,8 @@ User can zoom the Manga images.
 2. User Registration and login.
 User can register on our app and login through his email ID or mobile number.
 
-3. User Favourite list.
-User can make his favourite manga list.
+3. Popular wallpaper
+User can see most popular wallpapers Related to Manga and Anime.
 
 4. Auto sliding.
 User can activate auto sliding off Manga Pages while reading.
