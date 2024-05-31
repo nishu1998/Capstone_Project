@@ -45,8 +45,8 @@ Nishant Gautam ---------------
 1. Photo zoom.
 User can zoom the Manga images.
 
-2. User Registration and login.
-User can register on our app and login through his email ID or mobile number.
+2. Splash screen.
+User can See splash screen animation, while opening the app.
 
 3. Popular wallpaper
 User can see most popular wallpapers Related to Manga and Anime.
@@ -62,8 +62,8 @@ User search as specific Manga by its Name.
 2. Comic Library.
 Users can browse a library of manga comics available in the app.
 
-3. Push Notifications.
-Users receive notifications about new releases, updates, and recommendations. 
+3. Delete Data.
+User can delete all the store data within the app with single click. 
 
 4. Interactive Tutorial.
 Users have access to an in-app tutorial for navigating and using the app for the first time.
