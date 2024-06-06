@@ -21,21 +21,21 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        getmanga()
+        // Fetch manga with a specific ID
+        //fetchManga("659524dd597f3b00281f06ff")
 
-        binding.nextButton.setOnClickListener {
-            getmanga()
+
+
         }
     }
 
-    private fun getmanga() {
-
+   /* private fun fetchManga(id:String) {
 
        val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Please wait while data is fetching")
         progressDialog.show()
 
-        mangaApiObj.apiInterface.getData().enqueue(object : Callback<mangaResponceDataClass?> {
+        mangaApiObj.apiInterface.getData(id).enqueue(object : Callback<mangaResponceDataClass?> {
             override fun onResponse(
                 call: Call<mangaResponceDataClass?>,
                 response: Response<mangaResponceDataClass?>
@@ -66,4 +66,4 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-}
+}*/
