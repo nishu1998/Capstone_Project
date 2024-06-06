@@ -45,10 +45,12 @@ class MainActivity : AppCompatActivity() {
                     // Log success message
                     Log.d("Main", "API call successful: ${response.body()}")
                     binding.summaryTextView.text = response.body()?.summary
+
                 } else {
                     // Log response code and message if not successful
                     Log.d("Main", "API call failed: ${response.code()} - ${response.message()}")
                     binding.summaryTextView.text = response.body()?.summary
+
 
                 }
             }
