@@ -6,6 +6,11 @@
     <color name="G1">#5685F3</color>
     <color name="G2">#FFBBBB</color>
     <color name="G3">#F1C686</color>
+    <color name="S1">#F74E11</color>
+    <color name="S2">#6BFF00</color>
+    <color name="orange">#F44336</color>
+    <color name="teal">#4A4D48</color>
+    <color name="purple">#673AB7</color>
 
 
 </resources>
