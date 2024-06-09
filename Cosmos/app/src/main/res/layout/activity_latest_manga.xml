@@ -154,6 +154,7 @@
                 android:text="@string/Setting"
                 android:textColor="@android:color/black"
                 android:visibility="gone"/>
+
         </FrameLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
