@@ -1,3 +1,5 @@
+//MangaApiObj.kt
+
 package com.mahakalstudio.cosmos
 
 import android.util.Log

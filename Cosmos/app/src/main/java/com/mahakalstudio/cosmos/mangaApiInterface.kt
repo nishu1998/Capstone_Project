@@ -1,3 +1,5 @@
+//MangaApiInterface.kt
+
 package com.mahakalstudio.cosmos
 
 import retrofit2.Call
