@@ -1,3 +1,5 @@
+//MangaResponseDataClass.kt
+
 package com.mahakalstudio.cosmos
 
 data class mangaResponceDataClass(
