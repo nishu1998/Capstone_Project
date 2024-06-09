@@ -1,6 +1,19 @@
 <resources>
-    <string name="app_name">Cosmos</string>
+    <string name="app_name">MangaMania</string>
     <string name="Title">Manga Name</string>
     <string name="image">Manga Image</string>
+    <string name="home">Home</string>
+    <string name="Setting">Setting</string>
+    <string name="Favourite">Favourite</string>
+    <string name="Wallpaper">Wallpaper</string>
+    <string name="home_button_description">Home Button</string>
+    <string name="Setting_button_description">Setting Button</string>
+    <string name="Wallpaper_button_description">Wallpaper Button</string>
+    <string name="Favourite_button_description">Favourite Button</string>
+    <string name="Latest">Latest Manga</string>
+    <string name="Category">Categories</string>
+    <string name="MainImageDescription">Top Image Description</string>
+    <string name="PopularWallpaper">Popular Wallpapers</string>
+
 
 </resources>
