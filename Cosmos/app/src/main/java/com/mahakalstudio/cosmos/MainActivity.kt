@@ -1,5 +1,3 @@
-//MainActivity.kt
-
 package com.mahakalstudio.cosmos
 
 import android.app.ProgressDialog
@@ -10,52 +8,53 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.core.view.ViewCompat
+import androidx.recyclerview.widget.GridLayoutManager
 import com.mahakalstudio.cosmos.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
-import retrofit2.Retrofit
-import retrofit2.converter.gson.GsonConverterFactory
-import androidx.appcompat.widget.SearchView
-import androidx.recyclerview.widget.LinearLayoutManager
-
 
 class MainActivity : AppCompatActivity() {
-    //API URL - https://mangaverse-api.p.rapidapi.com/manga
 
-    lateinit var binding: ActivityMainBinding
-
+    private lateinit var binding: ActivityMainBinding
+    private lateinit var itemAdapter: ItemAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        // Fetch manga with a specific ID
-        //fetchManga("659524dd597f3b00281f06ff")
 
+        // Initialize RecyclerView adapter with an empty list
+        itemAdapter = ItemAdapter(emptyList())
+
+        // Set up RecyclerView with GridLayoutManager for 2 columns
+        binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
+        binding.recyclerView.adapter = itemAdapter
+
+        // Fetch manga data from API
+        fetchManga(1, "Harem,Fantasy", false, "all")
+
+        // Set up click listeners for buttons
         binding.customButton.setOnClickListener {
-            val intent = Intent(this, LatestManga::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, LatestManga::class.java))
         }
 
         binding.button2.setOnClickListener {
-            val intent = Intent(this, MangaCategory::class.java)
-            startActivity(intent)
+            startActivity(Intent(this, MangaCategory::class.java))
         }
 
-        // Set the home button in the after-click state
+        // Set up home button visibility and animation
         binding.homeTooltip.visibility = View.VISIBLE
         ViewCompat.animate(binding.homeTooltip).scaleX(1f).scaleY(1f).setDuration(300).start()
 
-        // Setup click listeners for the buttons
+        // Set up click listeners for other buttons
         setupClick(binding.homeButton, MainActivity::class.java)
         setupClick(binding.messagesButton, Wallpaper::class.java)
         setupClick(binding.userButton, Favourites::class.java)
         setupClick(binding.settingsButton, Setting::class.java)
 
-
-        val searchView = binding.searchView
-        searchView.setOnQueryTextListener(object :android.widget.SearchView.OnQueryTextListener {
+        // Set up search view listener
+        binding.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Perform search or API call here
                 return true
@@ -66,71 +65,43 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+    }
 
-        // Sample data for RecyclerView
-        val itemList = listOf(
-            Pair(Item("Item 1", R.drawable.image1), Item("Item 2", R.drawable.image2)),
-            Pair(Item("Item 3", R.drawable.image3), Item("Item 4", R.drawable.image2)),
-            Pair(Item("Item 1", R.drawable.image1), Item("Item 2", R.drawable.image2)),
-            Pair(Item("Item 3", R.drawable.image3), Item("Item 4", R.drawable.image2))
-        )
-
-        // Set up RecyclerView (vertical)
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = ItemAdapter(itemList)
-
-        }
     private fun setupClick(button: View, activityClass: Class<*>) {
         button.setOnClickListener {
-            // Start the corresponding activity
             startActivity(Intent(this, activityClass))
-
-            // Finish this activity if needed
             if (activityClass != MainActivity::class.java) {
                 finish()
-
             }
         }
     }
-}
 
-
-
-   /* private fun fetchManga(id:String) {
-
-       val progressDialog = ProgressDialog(this)
+    private fun fetchManga(page: Int, genres: String, nsfw: Boolean, type: String) {
+        val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Please wait while data is fetching")
         progressDialog.show()
 
-        mangaApiObj.apiInterface.getData(id).enqueue(object : Callback<mangaResponceDataClass?> {
+        MangaApiObj.apiInterface.getData(page, genres, nsfw, type).enqueue(object : Callback<MangaResponseDataClass> {
             override fun onResponse(
-                call: Call<mangaResponceDataClass?>,
-                response: Response<mangaResponceDataClass?>
+                call: Call<MangaResponseDataClass>,
+                response: Response<MangaResponseDataClass>
             ) {
                 progressDialog.dismiss()
                 if (response.isSuccessful) {
-                    // Log success message
-                    Log.d("Main", "API call successful: ${response.body()}")
-                    binding.summaryTextView.text = response.body()?.summary
-
+                    val mangaList = response.body()?.data ?: emptyList()
+                    itemAdapter.updateData(mangaList) // Update adapter with fetched data
                 } else {
-                    // Log response code and message if not successful
                     Log.d("Main", "API call failed: ${response.code()} - ${response.message()}")
-                    binding.summaryTextView.text = response.body()?.summary
-
-
+                    // Handle unsuccessful response
+                    Toast.makeText(this@MainActivity, "Failed to fetch manga", Toast.LENGTH_SHORT).show()
                 }
             }
 
-            override fun onFailure(call: Call<mangaResponceDataClass?>, t: Throwable) {
-                Toast.makeText(this@MainActivity,"${t.localizedMessage}",Toast.LENGTH_SHORT)
-                    .show()
-                Log.d("Main", "fail")
+            override fun onFailure(call: Call<MangaResponseDataClass>, t: Throwable) {
                 progressDialog.dismiss()
-
+                Log.e("Main", "API call failed", t)
+                Toast.makeText(this@MainActivity, "Failed to fetch manga: ${t.localizedMessage}", Toast.LENGTH_SHORT).show()
             }
         })
     }
-
-
-}*/
+}

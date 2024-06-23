@@ -13,7 +13,7 @@ import com.mahakalstudio.cosmos.databinding.ActivityLatestMangaBinding
 class LatestManga : AppCompatActivity() {
 
     private lateinit var binding: ActivityLatestMangaBinding
-    private lateinit var itemList: List<Pair<Item, Item>>
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityLatestMangaBinding.inflate(layoutInflater)
@@ -26,21 +26,7 @@ class LatestManga : AppCompatActivity() {
         setupClick(binding.settingsButton, Setting::class.java)
 
 
-        // Set up RecyclerView adapter with the same dataset used in MainActivity
-        itemList = listOf(
-            Pair(Item("Item 1", R.drawable.image1), Item("Item 2", R.drawable.image2)),
-            Pair(Item("Item 3", R.drawable.image3), Item("Item 4", R.drawable.image2)),
-            Pair(Item("Item 1", R.drawable.image1), Item("Item 2", R.drawable.image2)),
-            Pair(Item("Item 3", R.drawable.image3), Item("Item 4", R.drawable.image2)),
-            Pair(Item("Item 1", R.drawable.image1), Item("Item 2", R.drawable.image2)),
-            Pair(Item("Item 3", R.drawable.image3), Item("Item 4", R.drawable.image2)),
 
-            )
-        val adapter = ItemAdapter(itemList)
-
-        // Set RecyclerView adapter and layout manager
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
 
     }
 

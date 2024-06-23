@@ -1,8 +1,6 @@
-//MangaResponseDataClass.kt
-
 package com.mahakalstudio.cosmos
 
-data class mangaResponceDataClass(
+data class Manga(
     val authors: List<String>,
     val create_at: Long,
     val genres: List<String>,
@@ -16,4 +14,8 @@ data class mangaResponceDataClass(
     val total_chapter: Int,
     val type: String,
     val update_at: Long
+)
+
+data class MangaResponseDataClass(
+    val data: List<Manga>
 )

@@ -33,21 +33,6 @@ class Wallpaper : AppCompatActivity() {
         setupClick(binding.userButton, Favourites::class.java)
         setupClick(binding.settingsButton, Setting::class.java)
 
-        // Set up RecyclerView adapter with the same dataset used in MainActivity
-        itemList = listOf(
-            Pair(Item("Item 1", R.drawable.image1), Item("Item 2", R.drawable.image2)),
-            Pair(Item("Item 3", R.drawable.image3), Item("Item 4", R.drawable.image2)),
-            Pair(Item("Item 1", R.drawable.image1), Item("Item 2", R.drawable.image2)),
-            Pair(Item("Item 3", R.drawable.image3), Item("Item 4", R.drawable.image2)),
-            Pair(Item("Item 1", R.drawable.image1), Item("Item 2", R.drawable.image2)),
-            Pair(Item("Item 3", R.drawable.image3), Item("Item 4", R.drawable.image2)),
-
-        )
-        val adapter = ItemAdapter(itemList)
-
-        // Set RecyclerView adapter and layout manager
-        binding.recyclerView.layoutManager = LinearLayoutManager(this)
-        binding.recyclerView.adapter = adapter
 
 
     }

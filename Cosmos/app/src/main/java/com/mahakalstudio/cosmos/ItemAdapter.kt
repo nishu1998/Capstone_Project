@@ -1,21 +1,17 @@
-//ItemAdapter.kt
-
 package com.mahakalstudio.cosmos
 
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
+import com.bumptech.glide.Glide
 import com.mahakalstudio.cosmos.databinding.ItemLayoutBinding
 
-class ItemAdapter(private val itemList: List<Pair<Item, Item>>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter(private var itemList: List<Manga>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     inner class ItemViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
-        fun bind(itemPair: Pair<Item, Item>) {
-            val (item1, item2) = itemPair
-            binding.itemImage1.setImageResource(item1.imageResId)
-            binding.itemText1.text = item1.name
-            binding.itemImage2.setImageResource(item2.imageResId)
-            binding.itemText2.text = item2.name
+        fun bind(manga: Manga) {
+            Glide.with(binding.itemImage1.context).load(manga.thumb).into(binding.itemImage1)
+            binding.itemText1.text = manga.title
         }
     }
 
@@ -28,5 +24,13 @@ class ItemAdapter(private val itemList: List<Pair<Item, Item>>) : RecyclerView.A
         holder.bind(itemList[position])
     }
 
-    override fun getItemCount(): Int = itemList.size
+    override fun getItemCount(): Int {
+        return itemList.size
+    }
+
+    // Function to update adapter's dataset
+    fun updateData(newItemList: List<Manga>) {
+        itemList = newItemList
+        notifyDataSetChanged()
+    }
 }

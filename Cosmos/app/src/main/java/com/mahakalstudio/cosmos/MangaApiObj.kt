@@ -7,9 +7,8 @@ import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
-import retrofit2.create
 
-object mangaApiObj {
+object MangaApiObj {
     private const val API_KEY = "991217ddf3msh7bcf1357bd7da71p1859f9jsn4cc144f8c41c"
     private val retrofit by lazy {
         Retrofit.Builder().baseUrl("https://mangaverse-api.p.rapidapi.com/")
@@ -19,7 +18,7 @@ object mangaApiObj {
     }
 
     val apiInterface by lazy {
-        retrofit.create(mangaApiInterface::class.java)
+        retrofit.create(MangaApiInterface::class.java)
     }
 
 
