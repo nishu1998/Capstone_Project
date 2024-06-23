@@ -32,7 +32,7 @@ class MainActivity : AppCompatActivity() {
         binding.recyclerView.adapter = itemAdapter
 
         // Fetch manga data from API
-        fetchManga(1, "Harem,Fantasy", false, "all")
+        fetchManga("Harem,Fantasy",  false, "all")
 
         // Set up click listeners for buttons
         binding.customButton.setOnClickListener {
@@ -76,32 +76,57 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun fetchManga(page: Int, genres: String, nsfw: Boolean, type: String) {
+    private fun fetchManga(genres: String, nsfw: Boolean, type: String) {
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Please wait while data is fetching")
         progressDialog.show()
 
-        MangaApiObj.apiInterface.getData(page, genres, nsfw, type).enqueue(object : Callback<MangaResponseDataClass> {
-            override fun onResponse(
-                call: Call<MangaResponseDataClass>,
-                response: Response<MangaResponseDataClass>
-            ) {
-                progressDialog.dismiss()
-                if (response.isSuccessful) {
-                    val mangaList = response.body()?.data ?: emptyList()
-                    itemAdapter.updateData(mangaList) // Update adapter with fetched data
-                } else {
-                    Log.d("Main", "API call failed: ${response.code()} - ${response.message()}")
-                    // Handle unsuccessful response
-                    Toast.makeText(this@MainActivity, "Failed to fetch manga", Toast.LENGTH_SHORT).show()
-                }
-            }
+        val apiInterface = MangaApiObj.apiInterface
+        val mangaList = mutableListOf<Manga>()
 
-            override fun onFailure(call: Call<MangaResponseDataClass>, t: Throwable) {
-                progressDialog.dismiss()
-                Log.e("Main", "API call failed", t)
-                Toast.makeText(this@MainActivity, "Failed to fetch manga: ${t.localizedMessage}", Toast.LENGTH_SHORT).show()
-            }
-        })
+        // Initial page number
+        var page = 1
+
+        // Function to fetch next page
+        fun fetchNextPage() {
+            apiInterface.getData(page, genres, nsfw, type).enqueue(object : Callback<MangaResponseDataClass> {
+                override fun onResponse(call: Call<MangaResponseDataClass>, response: Response<MangaResponseDataClass>) {
+                    progressDialog.dismiss()
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        if (body != null) {
+                            val fetchedManga = body.data
+                            mangaList.addAll(fetchedManga)
+                            // Check if there are more results to fetch
+                            if (!fetchedManga.isNullOrEmpty()) {
+                                // Increment page number for next request
+                                page++
+                                // Fetch next page recursively
+                                fetchNextPage()
+                            } else {
+                                // All pages fetched, update adapter with collected mangaList
+                                itemAdapter.updateData(mangaList)
+                            }
+                        } else {
+                            Log.d("Main", "Response body is null")
+                            Toast.makeText(this@MainActivity, "Response body is null", Toast.LENGTH_SHORT).show()
+                        }
+                    } else {
+                        Log.d("Main", "API call failed: ${response.code()} - ${response.message()}")
+                        Toast.makeText(this@MainActivity, "Failed to fetch manga", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
+                override fun onFailure(call: Call<MangaResponseDataClass>, t: Throwable) {
+                    progressDialog.dismiss()
+                    Log.e("Main", "API call failed", t)
+                    Toast.makeText(this@MainActivity, "Failed to fetch manga: ${t.localizedMessage}", Toast.LENGTH_SHORT).show()
+                }
+            })
+        }
+
+        // Start fetching the first page
+        fetchNextPage()
     }
+
 }

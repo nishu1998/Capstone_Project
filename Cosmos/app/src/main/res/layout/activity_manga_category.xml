@@ -7,11 +7,93 @@
     android:background="@color/white"
     tools:context=".MangaCategory">
 
-    <!-- Content Above Navigation Bar -->
-    <!-- Define your content here -->
 
     <!-- Navigation Bar -->
 
+    <Button
+        android:id="@+id/A"
+        style="@style/CustomButton"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginTop="67dp"
+        android:layout_marginBottom="42dp"
+        android:text="Fantasy"
+        app:layout_constraintBottom_toTopOf="@+id/B"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Button
+        android:id="@+id/B"
+        style="@style/CustomButton"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="69dp"
+        android:text="@string/Latest"
+        app:layout_constraintBottom_toTopOf="@+id/D"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/C"
+        style="@style/CustomButton"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="68dp"
+        android:text="Harem"
+        app:layout_constraintBottom_toTopOf="@+id/E"
+        app:layout_constraintEnd_toStartOf="@+id/B"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/D"
+        style="@style/CustomButton"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="72dp"
+        android:text="@string/Latest"
+        app:layout_constraintBottom_toTopOf="@+id/F"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/E"
+        style="@style/CustomButton"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="72dp"
+        android:text="@string/Latest"
+        app:layout_constraintBottom_toTopOf="@+id/G"
+        app:layout_constraintEnd_toStartOf="@+id/D"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/F"
+        style="@style/CustomButton"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="134dp"
+        android:text="@string/Latest"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/G"
+        style="@style/CustomButton"
+        android:layout_width="170dp"
+        android:layout_height="55dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginEnd="39dp"
+        android:layout_marginBottom="134dp"
+        android:text="@string/Latest"
+        app:layout_constraintBottom_toTopOf="@+id/navigation_bar"
+        app:layout_constraintEnd_toStartOf="@+id/F"
+        app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
         android:id="@+id/navigation_bar"
