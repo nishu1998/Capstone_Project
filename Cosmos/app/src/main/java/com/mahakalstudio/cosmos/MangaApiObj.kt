@@ -9,7 +9,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object MangaApiObj {
-    private const val API_KEY = "991217ddf3msh7bcf1357bd7da71p1859f9jsn4cc144f8c41c"
+    private const val API_KEY = "1deed6ab34msh18ee81a00aa848dp15ed06jsn0a70a29bf016"
     private val retrofit by lazy {
         Retrofit.Builder().baseUrl("https://mangaverse-api.p.rapidapi.com/")
             .addConverterFactory(GsonConverterFactory.create())
