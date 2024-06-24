@@ -114,7 +114,7 @@ class MainActivity : AppCompatActivity() {
                         val fetchedManga = body.data
                         mangaList.addAll(fetchedManga)
                         itemAdapter.updateData(mangaList)
-                        // Check if there are more results to fetch
+                        // Check for if there are more results to fetch
                         if (!fetchedManga.isNullOrEmpty()) {
                             // Increment page number for next request
                             page++
