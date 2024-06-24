@@ -2,11 +2,12 @@ package com.mahakalstudio.cosmos
 
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -48,7 +49,7 @@ class MainActivity : AppCompatActivity() {
         })
 
         // Fetch initial manga data from API
-        fetchManga("Harem,Fantasy", false, "all")
+        fetchManga("Harem,Fantasy,Action", false, "all")
 
         // Set up click listeners for buttons
         binding.customButton.setOnClickListener {
@@ -70,14 +71,31 @@ class MainActivity : AppCompatActivity() {
         setupClick(binding.settingsButton, Setting::class.java)
 
         // Set up search view listener
-        binding.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Perform search or API call here
+                filterManga(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
                 // Filter search results as the user types
+                filterManga(newText)
+                return true
+            }
+        })
+
+        // Set up genre search
+        binding.genreSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // Perform genre search
+                filterByGenre(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // Update genre search as user types
+                filterByGenre(newText)
                 return true
             }
         })
@@ -133,5 +151,13 @@ class MainActivity : AppCompatActivity() {
                 Toast.makeText(this@MainActivity, "Failed to fetch manga: ${t.localizedMessage}", Toast.LENGTH_SHORT).show()
             }
         })
+    }
+
+    private fun filterManga(query: String) {
+        itemAdapter.filterList(query, binding.genreSearchView.query.toString())
+    }
+
+    private fun filterByGenre(genreQuery: String) {
+        itemAdapter.filterList(binding.searchView.query.toString(), genreQuery)
     }
 }

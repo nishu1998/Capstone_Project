@@ -17,6 +17,9 @@
         android:theme="@style/Theme.Cosmos"
         tools:targetApi="31">
         <activity
+            android:name=".ReadingActivity"
+            android:exported="false" />
+        <activity
             android:name=".PopularWallpaper"
             android:exported="false" />
         <activity

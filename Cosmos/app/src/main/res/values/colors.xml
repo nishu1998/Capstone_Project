@@ -12,5 +12,6 @@
     <color name="teal">#4A4D48</color>
     <color name="purple">#673AB7</color>
 
-
+    <color name="lightModeBackground">#FFFFFF</color>
+    <color name="darkModeBackground">#2F2E2E</color>
 </resources>
