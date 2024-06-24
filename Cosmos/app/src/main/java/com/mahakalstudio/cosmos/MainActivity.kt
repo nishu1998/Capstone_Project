@@ -84,6 +84,21 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+
+        // Set up genre search
+        binding.genreSearchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
+            override fun onQueryTextSubmit(query: String): Boolean {
+                // Perform genre search
+                filterByGenre(query)
+                return true
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                // Update genre search as user types
+                filterByGenre(newText)
+                return true
+            }
+        })
     }
 
     private fun setupClick(button: View, activityClass: Class<*>) {
@@ -114,7 +129,7 @@ class MainActivity : AppCompatActivity() {
                         val fetchedManga = body.data
                         mangaList.addAll(fetchedManga)
                         itemAdapter.updateData(mangaList)
-                        // Check for if there are more results to fetch
+                        // Check if there are more results to fetch
                         if (!fetchedManga.isNullOrEmpty()) {
                             // Increment page number for next request
                             page++
@@ -139,6 +154,10 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun filterManga(query: String) {
-        itemAdapter.filterList(query)
+        itemAdapter.filterList(query, binding.genreSearchView.query.toString())
+    }
+
+    private fun filterByGenre(genreQuery: String) {
+        itemAdapter.filterList(binding.searchView.query.toString(), genreQuery)
     }
 }

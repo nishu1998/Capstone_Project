@@ -33,16 +33,15 @@ class ItemAdapter(private var itemList: List<Manga>) : RecyclerView.Adapter<Item
     // Function to update adapter's dataset
     fun updateData(newItemList: List<Manga>) {
         itemList = newItemList
-        filterList("")
-        notifyDataSetChanged()
+        filterList("", "")
     }
 
     // Function to filter the list based on search query
-    fun filterList(query: String) {
-        filteredList = if (query.isEmpty()) {
-            itemList
-        } else {
-            itemList.filter { it.title.contains(query, ignoreCase = true) }
+    fun filterList(titleQuery: String, genreQuery: String) {
+        filteredList = itemList.filter { manga ->
+            val titleMatch = manga.title.contains(titleQuery, ignoreCase = true)
+            val genreMatch = manga.genres.any { it.contains(genreQuery, ignoreCase = true) }
+            titleMatch && genreMatch
         }
         notifyDataSetChanged()
     }
