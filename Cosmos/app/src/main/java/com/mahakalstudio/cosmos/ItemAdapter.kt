@@ -8,6 +8,8 @@ import com.mahakalstudio.cosmos.databinding.ItemLayoutBinding
 
 class ItemAdapter(private var itemList: List<Manga>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
+    private var filteredList: List<Manga> = itemList
+
     inner class ItemViewHolder(private val binding: ItemLayoutBinding) : RecyclerView.ViewHolder(binding.root) {
         fun bind(manga: Manga) {
             Glide.with(binding.itemImage1.context).load(manga.thumb).into(binding.itemImage1)
@@ -21,16 +23,27 @@ class ItemAdapter(private var itemList: List<Manga>) : RecyclerView.Adapter<Item
     }
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
-        holder.bind(itemList[position])
+        holder.bind(filteredList[position])
     }
 
     override fun getItemCount(): Int {
-        return itemList.size
+        return filteredList.size
     }
 
     // Function to update adapter's dataset
     fun updateData(newItemList: List<Manga>) {
         itemList = newItemList
+        filterList("")
+        notifyDataSetChanged()
+    }
+
+    // Function to filter the list based on search query
+    fun filterList(query: String) {
+        filteredList = if (query.isEmpty()) {
+            itemList
+        } else {
+            itemList.filter { it.title.contains(query, ignoreCase = true) }
+        }
         notifyDataSetChanged()
     }
 }

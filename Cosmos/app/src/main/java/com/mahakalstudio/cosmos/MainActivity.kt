@@ -2,13 +2,15 @@ package com.mahakalstudio.cosmos
 
 import android.app.ProgressDialog
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.view.View
+import android.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mahakalstudio.cosmos.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
@@ -18,6 +20,9 @@ class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
     private lateinit var itemAdapter: ItemAdapter
+    private val mangaList = mutableListOf<Manga>()
+    private var page = 1
+    private var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -25,14 +30,26 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Initialize RecyclerView adapter with an empty list
-        itemAdapter = ItemAdapter(emptyList())
+        itemAdapter = ItemAdapter(mangaList)
 
         // Set up RecyclerView with GridLayoutManager for 2 columns
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)
         binding.recyclerView.adapter = itemAdapter
 
-        // Fetch manga data from API
-        fetchManga("Harem,Fantasy",  false, "all")
+        // Set scroll listener
+        binding.recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+
+                if (!recyclerView.canScrollVertically(1) && !isLoading) {
+                    // Reached the end of the list
+                    fetchManga("Harem,Fantasy", false, "all")
+                }
+            }
+        })
+
+        // Fetch initial manga data from API
+        fetchManga("Harem,Fantasy,Action", false, "all")
 
         // Set up click listeners for buttons
         binding.customButton.setOnClickListener {
@@ -54,14 +71,16 @@ class MainActivity : AppCompatActivity() {
         setupClick(binding.settingsButton, Setting::class.java)
 
         // Set up search view listener
-        binding.searchView.setOnQueryTextListener(object : android.widget.SearchView.OnQueryTextListener {
+        binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
             override fun onQueryTextSubmit(query: String): Boolean {
                 // Perform search or API call here
+                filterManga(query)
                 return true
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
                 // Filter search results as the user types
+                filterManga(newText)
                 return true
             }
         })
@@ -77,56 +96,49 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun fetchManga(genres: String, nsfw: Boolean, type: String) {
+        isLoading = true
         val progressDialog = ProgressDialog(this)
         progressDialog.setMessage("Please wait while data is fetching")
         progressDialog.show()
 
         val apiInterface = MangaApiObj.apiInterface
-        val mangaList = mutableListOf<Manga>()
-
-        // Initial page number
-        var page = 1
 
         // Function to fetch next page
-        fun fetchNextPage() {
-            apiInterface.getData(page, genres, nsfw, type).enqueue(object : Callback<MangaResponseDataClass> {
-                override fun onResponse(call: Call<MangaResponseDataClass>, response: Response<MangaResponseDataClass>) {
-                    progressDialog.dismiss()
-                    if (response.isSuccessful) {
-                        val body = response.body()
-                        if (body != null) {
-                            val fetchedManga = body.data
-                            mangaList.addAll(fetchedManga)
-                            // Check if there are more results to fetch
-                            if (!fetchedManga.isNullOrEmpty()) {
-                                // Increment page number for next request
-                                page++
-                                // Fetch next page recursively
-                                fetchNextPage()
-                            } else {
-                                // All pages fetched, update adapter with collected mangaList
-                                itemAdapter.updateData(mangaList)
-                            }
-                        } else {
-                            Log.d("Main", "Response body is null")
-                            Toast.makeText(this@MainActivity, "Response body is null", Toast.LENGTH_SHORT).show()
+        apiInterface.getData(page, genres, nsfw, type).enqueue(object : Callback<MangaResponseDataClass> {
+            override fun onResponse(call: Call<MangaResponseDataClass>, response: Response<MangaResponseDataClass>) {
+                progressDialog.dismiss()
+                isLoading = false
+                if (response.isSuccessful) {
+                    val body = response.body()
+                    if (body != null) {
+                        val fetchedManga = body.data
+                        mangaList.addAll(fetchedManga)
+                        itemAdapter.updateData(mangaList)
+                        // Check if there are more results to fetch
+                        if (!fetchedManga.isNullOrEmpty()) {
+                            // Increment page number for next request
+                            page++
                         }
                     } else {
-                        Log.d("Main", "API call failed: ${response.code()} - ${response.message()}")
-                        Toast.makeText(this@MainActivity, "Failed to fetch manga", Toast.LENGTH_SHORT).show()
+                        Log.d("Main", "Response body is null")
+                        Toast.makeText(this@MainActivity, "Response body is null", Toast.LENGTH_SHORT).show()
                     }
+                } else {
+                    Log.d("Main", "API call failed: ${response.code()} - ${response.message()}")
+                    Toast.makeText(this@MainActivity, "Failed to fetch manga", Toast.LENGTH_SHORT).show()
                 }
+            }
 
-                override fun onFailure(call: Call<MangaResponseDataClass>, t: Throwable) {
-                    progressDialog.dismiss()
-                    Log.e("Main", "API call failed", t)
-                    Toast.makeText(this@MainActivity, "Failed to fetch manga: ${t.localizedMessage}", Toast.LENGTH_SHORT).show()
-                }
-            })
-        }
-
-        // Start fetching the first page
-        fetchNextPage()
+            override fun onFailure(call: Call<MangaResponseDataClass>, t: Throwable) {
+                progressDialog.dismiss()
+                isLoading = false
+                Log.e("Main", "API call failed", t)
+                Toast.makeText(this@MainActivity, "Failed to fetch manga: ${t.localizedMessage}", Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
+    private fun filterManga(query: String) {
+        itemAdapter.filterList(query)
+    }
 }
