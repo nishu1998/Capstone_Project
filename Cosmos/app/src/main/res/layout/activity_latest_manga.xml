@@ -6,7 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".LatestManga">
 
-
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerView"
@@ -17,7 +16,6 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <!-- Navigation Bar -->
     <LinearLayout
@@ -31,6 +29,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintEnd_toEndOf="parent">
+
         <!-- Home Button -->
         <FrameLayout
             android:id="@+id/home_button"
@@ -48,7 +47,7 @@
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/home"
-                app:tint="@android:color/black"/>
+                app:tint="@android:color/black" />
 
             <TextView
                 android:id="@+id/home_tooltip"
@@ -59,7 +58,7 @@
                 android:padding="8dp"
                 android:text="@string/home"
                 android:textColor="@android:color/black"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </FrameLayout>
 
         <!-- Wallpaper Button -->
@@ -73,13 +72,13 @@
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:contentDescription="@string/Wallpaper_button_description">
+            android:contentDescription="wallpaper_button_description">
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/wallpaper"
-                app:tint="@android:color/black"/>
+                app:tint="@android:color/black" />
 
             <TextView
                 android:id="@+id/messages_tooltip"
@@ -88,9 +87,9 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:background="@drawable/tooltip_background"
                 android:padding="8dp"
-                android:text="@string/Wallpaper"
+                android:text="wallpaper"
                 android:textColor="@android:color/black"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </FrameLayout>
 
         <!-- Favourite Button -->
@@ -104,13 +103,13 @@
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:contentDescription="@string/Favourite_button_description">
+            android:contentDescription="favourite_button_description">
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/favourite"
-                app:tint="@android:color/black"/>
+                app:tint="@android:color/black" />
 
             <TextView
                 android:id="@+id/user_tooltip"
@@ -119,9 +118,9 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:background="@drawable/tooltip_background"
                 android:padding="8dp"
-                android:text="@string/Favourite"
+                android:text="favourite"
                 android:textColor="@android:color/black"
-                android:visibility="gone"/>
+                android:visibility="gone" />
         </FrameLayout>
 
         <!-- Settings Button -->
@@ -135,13 +134,13 @@
             android:padding="16dp"
             android:clickable="true"
             android:focusable="true"
-            android:contentDescription="@string/Setting_button_description">
+            android:contentDescription="setting_button_description">
 
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
                 android:src="@drawable/setting"
-                app:tint="@android:color/black"/>
+                app:tint="@android:color/black" />
 
             <TextView
                 android:id="@+id/settings_tooltip"
@@ -150,10 +149,9 @@
                 android:layout_gravity="center_horizontal|bottom"
                 android:background="@drawable/tooltip_background"
                 android:padding="8dp"
-                android:text="@string/Setting"
+                android:text="setting"
                 android:textColor="@android:color/black"
-                android:visibility="gone"/>
-
+                android:visibility="gone" />
         </FrameLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

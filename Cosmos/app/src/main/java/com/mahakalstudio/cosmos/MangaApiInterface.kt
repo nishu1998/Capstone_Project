@@ -13,5 +13,11 @@ interface MangaApiInterface {
                  @Query("type") type: String
     ):Call<MangaResponseDataClass>
 
-
+    @GET("manga/latest")
+    fun getLatestManga(
+        @Query("page") page: Int,
+        @Query("genres") genres: String,
+        @Query("nsfw") nsfw: Boolean,
+        @Query("type") type: String
+    ): Call<MangaResponseDataClass>
 }
