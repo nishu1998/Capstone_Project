@@ -18,18 +18,23 @@ class MangaCategory : AppCompatActivity() {
 
         // Setup click listeners for the buttons
         binding.A.setOnClickListener {
+            hideButtons()
             replaceFragment(FragmentA())
         }
         binding.B.setOnClickListener {
+            hideButtons()
             replaceFragment(FragmentB())
         }
         binding.C.setOnClickListener {
+            hideButtons()
             replaceFragment(FragmentC())
         }
         binding.D.setOnClickListener {
+            hideButtons()
             replaceFragment(FragmentD())
         }
         binding.E.setOnClickListener {
+            hideButtons()
             replaceFragment(FragmentE())
         }
 
@@ -53,5 +58,13 @@ class MangaCategory : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    private fun hideButtons() {
+        binding.A.visibility = View.GONE
+        binding.B.visibility = View.GONE
+        binding.C.visibility = View.GONE
+        binding.D.visibility = View.GONE
+        binding.E.visibility = View.GONE
     }
 }
