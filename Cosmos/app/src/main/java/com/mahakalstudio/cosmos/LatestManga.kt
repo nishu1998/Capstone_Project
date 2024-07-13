@@ -5,6 +5,7 @@ package com.mahakalstudio.cosmos
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.Settings
 import android.view.View
 import com.mahakalstudio.cosmos.databinding.ActivityLatestMangaBinding
 
@@ -22,7 +23,7 @@ class LatestManga : AppCompatActivity() {
         setupClick(binding.homeButton, MainActivity::class.java)
         setupClick(binding.messagesButton, Wallpaper::class.java)
         setupClick(binding.userButton, Favourites::class.java)
-        setupClick(binding.settingsButton, Setting::class.java)
+        setupClick(binding.settingsButton, Settings::class.java)
 
 
 
