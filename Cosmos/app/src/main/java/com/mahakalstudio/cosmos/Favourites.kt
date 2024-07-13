@@ -2,13 +2,13 @@
 
 package com.mahakalstudio.cosmos
 
+import Setting
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.ViewCompat
 import com.mahakalstudio.cosmos.databinding.ActivityFavouritesBinding
-import com.mahakalstudio.cosmos.databinding.ActivityMainBinding
 
 class Favourites : AppCompatActivity() {
 

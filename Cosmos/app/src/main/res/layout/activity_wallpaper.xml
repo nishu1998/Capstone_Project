@@ -7,15 +7,10 @@
     android:background="@color/white"
     tools:context=".Wallpaper">
 
-    <!-- Content Above Navigation Bar -->
     <!-- Define your content here -->
-
-
-
 
     <Button
         android:id="@+id/customButton"
-        style="@style/CustomButton"
         android:layout_width="match_parent"
         android:layout_height="55dp"
         android:layout_marginLeft="15dp"
@@ -26,7 +21,6 @@
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
 
     <!-- RecyclerView -->
     <androidx.recyclerview.widget.RecyclerView
@@ -39,7 +33,6 @@
         app:layout_constraintEnd_toEndOf="parent"/>
 
     <!-- Navigation Bar -->
-
     <LinearLayout
         android:id="@+id/navigation_bar"
         android:layout_width="0dp"
