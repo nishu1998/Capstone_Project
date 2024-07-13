@@ -1,5 +1,3 @@
-//MangaApiObj.kt
-
 package com.mahakalstudio.cosmos
 
 import android.util.Log
@@ -9,7 +7,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 
 object MangaApiObj {
-    private const val API_KEY = "1deed6ab34msh18ee81a00aa848dp15ed06jsn0a70a29bf016"
+    private const val API_KEY = "b221c41e2cmsh45089edecbf5070p14bf09jsne6dd42e8b71c"
     private val retrofit by lazy {
         Retrofit.Builder().baseUrl("https://mangaverse-api.p.rapidapi.com/")
             .addConverterFactory(GsonConverterFactory.create())

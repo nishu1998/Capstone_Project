@@ -1,4 +1,3 @@
-// PopularWallpaper.kt
 package com.mahakalstudio.cosmos
 
 import android.app.ProgressDialog

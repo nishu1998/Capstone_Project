@@ -3,13 +3,12 @@ package com.mahakalstudio.cosmos
 import android.content.Intent
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
-import com.mahakalstudio.cosmos.Favourites
-import com.mahakalstudio.cosmos.MainActivity
-import com.mahakalstudio.cosmos.Wallpaper
 import com.mahakalstudio.cosmos.databinding.ActivitySettingBinding
 
 class Setting : AppCompatActivity() {
@@ -30,8 +29,8 @@ class Setting : AppCompatActivity() {
         binding = ActivitySettingBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        // Set the initial state of the radio button
-        binding.radioDarkMode.isChecked = sharedPreferences.getBoolean("dark_mode", false)
+        // Set the initial state of the switch
+        binding.switchDarkMode.isChecked = sharedPreferences.getBoolean("dark_mode", false)
 
         // Set the setting button in the after-click state
         binding.settingsTooltip.visibility = View.VISIBLE
@@ -42,16 +41,18 @@ class Setting : AppCompatActivity() {
         setupClick(binding.messagesButton, binding.messagesTooltip, Wallpaper::class.java)
         setupClick(binding.userButton, binding.userTooltip, Favourites::class.java)
 
-        // Setup listener for the radio button
-        binding.radioDarkMode.setOnClickListener {
-            val isChecked = binding.radioDarkMode.isChecked
-            if (isChecked) {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-            } else {
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-            }
-            // Save the theme state to SharedPreferences
+        // Setup listener for the switch
+        binding.switchDarkMode.setOnCheckedChangeListener { _, isChecked ->
             sharedPreferences.edit().putBoolean("dark_mode", isChecked).apply()
+            restartActivity()
+        }
+    }
+
+    private fun restartActivity() {
+        Handler(Looper.getMainLooper()).post {
+            val intent = Intent(this, Setting::class.java)
+            startActivity(intent)
+            finish()
         }
     }
 
