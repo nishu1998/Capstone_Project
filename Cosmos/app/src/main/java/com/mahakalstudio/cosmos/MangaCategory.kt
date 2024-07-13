@@ -1,6 +1,5 @@
 package com.mahakalstudio.cosmos
 
-
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -19,7 +18,7 @@ class MangaCategory : AppCompatActivity() {
 
         // Setup click listeners for the buttons
         binding.A.setOnClickListener {
-           replaceFragment(FragmentA())
+            replaceFragment(FragmentA())
         }
         binding.B.setOnClickListener {
             replaceFragment(FragmentB())
@@ -34,7 +33,6 @@ class MangaCategory : AppCompatActivity() {
             replaceFragment(FragmentE())
         }
 
-
         // Setup click listeners for navigation buttons
         setupClick(binding.homeButton, MainActivity::class.java)
         setupClick(binding.messagesButton, Wallpaper::class.java)
@@ -44,7 +42,7 @@ class MangaCategory : AppCompatActivity() {
 
     private fun replaceFragment(fragment: Fragment) {
         supportFragmentManager.beginTransaction()
-            .replace(R.id.fragmentContainer, fragment)
+            .replace(binding.fragmentContainer.id, fragment)
             .commit()
     }
 
