@@ -22,22 +22,22 @@ class ReadWalpaper : AppCompatActivity() {
         if (wallpaperUrl != null) {
             Glide.with(this)
                 .load(wallpaperUrl)
-                .placeholder(R.drawable.loading3)  // Adjust placeholder image
-                .error(R.drawable.errorimage)        // Adjust error image
+                .placeholder(R.drawable.loading3)
+                .error(R.drawable.errorimage)
                 .into(binding.fullScreenImageView)
         } else {
             Log.e("ReadWallpaper", "Wallpaper URL is null")
         }
 
-
         binding.floatingButton1.setOnClickListener {
-            // Handle button 1 click
-            Toast.makeText(this, "Wallpaper Added To Favourite ", Toast.LENGTH_SHORT).show()
+            if (wallpaperUrl != null) {
+                PreferenceManager.saveFavorite(this, wallpaperUrl)
+                Toast.makeText(this, "Wallpaper Added To Favorite", Toast.LENGTH_SHORT).show()
+            }
         }
 
         binding.floatingButton2.setOnClickListener {
             // Handle button 2 click
-
         }
     }
 }
