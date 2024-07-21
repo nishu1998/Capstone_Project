@@ -17,6 +17,18 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".ReadWalpaper"
+            android:exported="false" />
+        <activity
+            android:name=".ReadManga"
+            android:exported="false" />
+        <activity
+            android:name=".FavWalpaper"
+            android:exported="false" />
+        <activity
+            android:name=".FavManga"
+            android:exported="false" />
+        <activity
             android:name=".ReadingActivity"
             android:exported="false" />
         <activity

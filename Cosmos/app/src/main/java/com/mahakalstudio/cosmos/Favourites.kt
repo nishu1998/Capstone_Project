@@ -15,6 +15,15 @@ class Favourites : AppCompatActivity() {
         binding = ActivityFavouritesBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
+        binding.favMangaButton.setOnClickListener {
+            val intent = Intent(this, FavManga::class.java)
+            startActivity(intent)
+        }
+
+        binding.favWalpaperButton.setOnClickListener {
+            val intent = Intent(this, FavWalpaper::class.java)
+            startActivity(intent)
+        }
         // Set the favourite button in the after-click state
         binding.userTooltip.visibility = View.VISIBLE
         ViewCompat.animate(binding.userTooltip).scaleX(1f).scaleY(1f).setDuration(300).start()
@@ -25,6 +34,8 @@ class Favourites : AppCompatActivity() {
         setupClick(binding.userButton, Favourites::class.java)
         setupClick(binding.settingsButton, Setting::class.java)
     }
+
+
     private fun setupClick(button: View, activityClass: Class<*>) {
         button.setOnClickListener {
             // Start the corresponding activity

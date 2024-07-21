@@ -7,6 +7,7 @@ import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mahakalstudio.cosmos.databinding.ActivityWallpaperBinding
@@ -29,6 +30,10 @@ class Wallpaper : AppCompatActivity() {
 
         setupRecyclerView()
         fetchWallpapers()
+
+        // Set the setting button in the after-click state
+        binding.messagesTooltip.visibility = View.VISIBLE
+        ViewCompat.animate(binding.messagesTooltip).scaleX(1f).scaleY(1f).setDuration(300).start()
 
         // Setup click listeners for the buttons
         setupClick(binding.homeButton, MainActivity::class.java)
