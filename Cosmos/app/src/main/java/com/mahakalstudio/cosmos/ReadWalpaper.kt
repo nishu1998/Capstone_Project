@@ -1,5 +1,6 @@
 package com.mahakalstudio.cosmos
 
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
@@ -37,7 +38,20 @@ class ReadWalpaper : AppCompatActivity() {
         }
 
         binding.floatingButton2.setOnClickListener {
-            // Handle button 2 click
+            if (wallpaperUrl != null) {
+                shareWallpaper(wallpaperUrl)
+            } else {
+                Toast.makeText(this, "Wallpaper URL is not available", Toast.LENGTH_SHORT).show()
+            }
         }
+    }
+
+    private fun shareWallpaper(wallpaperUrl: String) {
+        val shareIntent = Intent().apply {
+            action = Intent.ACTION_SEND
+            putExtra(Intent.EXTRA_TEXT, "Check out this amazing wallpaper: $wallpaperUrl")
+            type = "text/plain"
+        }
+        startActivity(Intent.createChooser(shareIntent, "Share wallpaper via"))
     }
 }
