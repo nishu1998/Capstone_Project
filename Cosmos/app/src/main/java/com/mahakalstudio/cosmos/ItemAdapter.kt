@@ -6,7 +6,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.mahakalstudio.cosmos.databinding.ItemLayoutBinding
 
-class ItemAdapter(private var itemList: List<Manga>) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
+class ItemAdapter(private var itemList: List<Manga>, private val itemClickListener: (Manga) -> Unit) : RecyclerView.Adapter<ItemAdapter.ItemViewHolder>() {
 
     private var filteredList: List<Manga> = itemList
 
@@ -14,6 +14,11 @@ class ItemAdapter(private var itemList: List<Manga>) : RecyclerView.Adapter<Item
         fun bind(manga: Manga) {
             Glide.with(binding.itemImage1.context).load(manga.thumb).into(binding.itemImage1)
             binding.itemText1.text = manga.title
+
+            // Set click listener
+            binding.root.setOnClickListener {
+                itemClickListener(manga)
+            }
         }
     }
 

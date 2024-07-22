@@ -1,6 +1,7 @@
 package com.mahakalstudio.cosmos
 
 import android.app.ProgressDialog
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -35,7 +36,15 @@ class FragmentD : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         // Initialize RecyclerView and adapter
-        itemAdapter = ItemAdapter(mangaList)
+        itemAdapter = ItemAdapter(mangaList) { manga ->
+            val intent = Intent(requireContext(), ReadManga::class.java).apply {
+                putExtra("MANGA_TITLE", manga.title)
+                putExtra("MANGA_THUMB", manga.thumb)
+                putExtra("MANGA_CHAPTERS", manga.total_chapter)
+                putExtra("MANGA_SUMMARY", manga.summary)
+            }
+            startActivity(intent)
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerView.adapter = itemAdapter
 

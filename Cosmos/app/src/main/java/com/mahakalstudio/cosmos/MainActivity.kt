@@ -30,7 +30,15 @@ class MainActivity : AppCompatActivity() {
         setContentView(binding.root)
 
         // Initialize RecyclerView adapter with an empty list
-        itemAdapter = ItemAdapter(mangaList)
+        itemAdapter = ItemAdapter(mangaList) { manga ->
+            val intent = Intent(this, ReadManga::class.java).apply {
+                putExtra("MANGA_TITLE", manga.title)
+                putExtra("MANGA_THUMB", manga.thumb)
+                putExtra("MANGA_CHAPTERS", manga.total_chapter)
+                putExtra("MANGA_SUMMARY", manga.summary)
+            }
+            startActivity(intent)
+        }
 
         // Set up RecyclerView with GridLayoutManager for 2 columns
         binding.recyclerView.layoutManager = GridLayoutManager(this, 2)

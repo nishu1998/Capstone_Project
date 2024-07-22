@@ -28,7 +28,15 @@ class LatestManga : AppCompatActivity() {
         setContentView(binding.root)
 
         // Setup RecyclerView
-        adapter = ItemAdapter(emptyList())
+        adapter = ItemAdapter(emptyList()) { manga ->
+            val intent = Intent(this, ReadManga::class.java).apply {
+                putExtra("MANGA_TITLE", manga.title)
+                putExtra("MANGA_THUMB", manga.thumb)
+                putExtra("MANGA_CHAPTERS", manga.total_chapter)
+                putExtra("MANGA_SUMMARY", manga.summary)
+            }
+            startActivity(intent)
+        }
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = adapter
 
