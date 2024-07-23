@@ -38,20 +38,8 @@ class ReadWalpaper : AppCompatActivity() {
         }
 
         binding.floatingButton2.setOnClickListener {
-            if (wallpaperUrl != null) {
-                shareWallpaper(wallpaperUrl)
-            } else {
-                Toast.makeText(this, "Wallpaper URL is not available", Toast.LENGTH_SHORT).show()
-            }
-        }
-    }
 
-    private fun shareWallpaper(wallpaperUrl: String) {
-        val shareIntent = Intent().apply {
-            action = Intent.ACTION_SEND
-            putExtra(Intent.EXTRA_TEXT, "Check out this amazing wallpaper: $wallpaperUrl")
-            type = "text/plain"
         }
-        startActivity(Intent.createChooser(shareIntent, "Share wallpaper via"))
+
     }
 }
