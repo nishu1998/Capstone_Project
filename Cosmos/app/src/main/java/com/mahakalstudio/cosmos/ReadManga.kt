@@ -37,6 +37,7 @@ class ReadManga : AppCompatActivity() {
 
         binding.floatingActionButton.setOnClickListener() {
             finish()
+
         }
     }
 
