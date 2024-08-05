@@ -37,7 +37,7 @@ class FragmentD : Fragment() {
 
         // Initialize RecyclerView and adapter
         itemAdapter = ItemAdapter(mangaList) { manga ->
-            val intent = Intent(requireContext(), ReadManga::class.java).apply {
+            val intent = Intent(requireContext(), MangaDetails::class.java).apply {
                 putExtra("MANGA_TITLE", manga.title)
                 putExtra("MANGA_THUMB", manga.thumb)
                 putExtra("MANGA_CHAPTERS", manga.total_chapter)

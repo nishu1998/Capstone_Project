@@ -31,7 +31,7 @@ class MainActivity : AppCompatActivity() {
 
         // Initialize RecyclerView adapter with an empty list
         itemAdapter = ItemAdapter(mangaList) { manga ->
-            val intent = Intent(this, ReadManga::class.java).apply {
+            val intent = Intent(this, MangaDetails::class.java).apply {
                 putExtra("MANGA_TITLE", manga.title)
                 putExtra("MANGA_THUMB", manga.thumb)
                 putExtra("MANGA_CHAPTERS", manga.total_chapter)

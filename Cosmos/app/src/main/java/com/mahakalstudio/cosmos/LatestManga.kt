@@ -8,7 +8,6 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahakalstudio.cosmos.databinding.ActivityLatestMangaBinding
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Call
@@ -29,7 +28,7 @@ class LatestManga : AppCompatActivity() {
 
         // Setup RecyclerView
         adapter = ItemAdapter(emptyList()) { manga ->
-            val intent = Intent(this, ReadManga::class.java).apply {
+            val intent = Intent(this, MangaDetails::class.java).apply {
                 putExtra("MANGA_TITLE", manga.title)
                 putExtra("MANGA_THUMB", manga.thumb)
                 putExtra("MANGA_CHAPTERS", manga.total_chapter)

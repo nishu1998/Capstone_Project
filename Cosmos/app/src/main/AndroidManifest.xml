@@ -17,10 +17,16 @@
         android:theme="@style/AppTheme"
         tools:targetApi="31">
         <activity
+            android:name=".ReadMangaChapter"
+            android:exported="false" />
+        <activity
+            android:name=".ReadChapters"
+            android:exported="false" />
+        <activity
             android:name=".ReadWalpaper"
             android:exported="false" />
         <activity
-            android:name=".ReadManga"
+            android:name=".MangaDetails"
             android:exported="false" />
         <activity
             android:name=".FavWalpaper"

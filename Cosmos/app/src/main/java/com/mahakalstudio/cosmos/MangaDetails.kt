@@ -1,6 +1,7 @@
 package com.mahakalstudio.cosmos
 
 import android.content.Context
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Toast
@@ -9,7 +10,7 @@ import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mahakalstudio.cosmos.databinding.ActivityReadMangaBinding
 
-class ReadManga : AppCompatActivity() {
+class MangaDetails : AppCompatActivity() {
     private lateinit var binding: ActivityReadMangaBinding
     private val sharedPreferences by lazy {
         getSharedPreferences("fav_manga", Context.MODE_PRIVATE)
@@ -26,7 +27,7 @@ class ReadManga : AppCompatActivity() {
         val summary = intent.getStringExtra("MANGA_SUMMARY")
 
         binding.titleTextView.text = title
-        binding.chapterTextView.text = "Chapters: $chapters"
+        binding.chapterTextView.text = "Total Chapters: $chapters"
         binding.summaryTextView.text = summary
 
         Glide.with(this).load(thumb).into(binding.imageView2)
@@ -35,9 +36,16 @@ class ReadManga : AppCompatActivity() {
             saveManga(BookmarkedManga(thumb!!, title!!))
         }
 
-        binding.floatingActionButton.setOnClickListener() {
+        binding.floatingActionButton.setOnClickListener {
             finish()
+        }
 
+        binding.readBtn.setOnClickListener {
+            val intent = Intent(this, ReadChapters::class.java).apply {
+                putExtra("MANGA_TITLE", title)
+                putExtra("MANGA_CHAPTERS", chapters)
+            }
+            startActivity(intent)
         }
     }
 
@@ -56,6 +64,6 @@ class ReadManga : AppCompatActivity() {
         editor.putString("saved_manga_list", gson.toJson(mangaList))
         editor.apply()
 
-        Toast.makeText(this, "Manga saved to favorites", Toast.LENGTH_SHORT).show()
+        Toast.makeText(this, "Manga saved to Favorites", Toast.LENGTH_SHORT).show()
     }
 }
