@@ -2,6 +2,7 @@ package com.mahakalstudio.cosmos
 
 import android.app.ProgressDialog
 import android.content.Intent
+import android.graphics.Typeface
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -11,12 +12,14 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.getkeepsafe.taptargetview.TapTarget
+import com.getkeepsafe.taptargetview.TapTargetSequence
+import com.getkeepsafe.taptargetview.TapTargetView
 import com.mahakalstudio.cosmos.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
 import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
-
 
 class MainActivity : AppCompatActivity() {
 
@@ -111,6 +114,9 @@ class MainActivity : AppCompatActivity() {
                 return true
             }
         })
+
+        // Show tutorial
+        showTutorial()
     }
 
     private fun setupClick(button: View, activityClass: Class<*>) {
@@ -171,5 +177,52 @@ class MainActivity : AppCompatActivity() {
 
     private fun filterByGenre(genreQuery: String) {
         itemAdapter.filterList(binding.searchView.query.toString(), genreQuery)
+    }
+
+    private fun showTutorial() {
+        TapTargetSequence(this)
+            .targets(
+                TapTarget.forView(findViewById(R.id.searchView), "Search View", "Use this to search for manga by name.")
+                    .transparentTarget(true)
+                    .cancelable(false)
+                    .textColor(android.R.color.black) // Set text color
+                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                TapTarget.forView(findViewById(R.id.genreSearchView), "Genre Search View", "Use this to search for manga by genre.")
+                    .transparentTarget(true)
+                    .cancelable(false)
+                    .textColor(android.R.color.black) // Set text color
+                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                TapTarget.forView(findViewById(R.id.customButton), "Latest Button", "Tap here to view the latest manga.")
+                    .transparentTarget(true)
+                    .cancelable(false)
+                    .textColor(android.R.color.black) // Set text color
+                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                TapTarget.forView(findViewById(R.id.button2), "Category Button", "Tap here to view manga categories.")
+                    .transparentTarget(true)
+                    .cancelable(false)
+                    .textColor(android.R.color.black) // Set text color
+                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                TapTarget.forView(findViewById(R.id.home_button), "Home Button", "Tap here to return to the home screen.")
+                    .transparentTarget(true)
+                    .cancelable(false)
+                    .textColor(android.R.color.black) // Set text color
+                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                TapTarget.forView(findViewById(R.id.messages_button), "Wallpaper Button", "Tap here to view wallpapers.")
+                    .transparentTarget(true)
+                    .cancelable(false)
+                    .textColor(android.R.color.black) // Set text color
+                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                TapTarget.forView(findViewById(R.id.user_button), "Favourites Button", "Tap here to view your favourite manga & wallpapers.")
+                    .transparentTarget(true)
+                    .cancelable(false)
+                    .textColor(android.R.color.black) // Set text color
+                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                TapTarget.forView(findViewById(R.id.settings_button), "Settings Button", "Tap here to open settings.")
+                    .transparentTarget(true)
+                    .cancelable(false)
+                    .textColor(android.R.color.black) // Set text color
+                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+            )
+            .start()
     }
 }

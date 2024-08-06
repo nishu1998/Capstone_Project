@@ -66,4 +66,5 @@ dependencies {
 
     implementation("com.davemorrissey.labs:subsampling-scale-image-view:3.10.0")
 
+    implementation ("com.getkeepsafe.taptargetview:taptargetview:1.13.2")
 }
