@@ -4,9 +4,10 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.util.Log
+import android.view.GestureDetector
+import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.recyclerview.widget.RecyclerView
 import com.mahakalstudio.cosmos.databinding.ActivityReadMangaChapterBinding
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -20,6 +21,7 @@ class ReadMangaChapter : AppCompatActivity() {
     private lateinit var handler: Handler
     private lateinit var autoScrollRunnable: Runnable
     private var isAutoScrolling = false
+    private lateinit var gestureDetector: GestureDetector
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,6 +53,20 @@ class ReadMangaChapter : AppCompatActivity() {
                     handler.postDelayed(this, 2200)
                 }
             }
+        }
+
+        // Initialize GestureDetector
+        gestureDetector = GestureDetector(this, object : GestureDetector.SimpleOnGestureListener() {
+            override fun onDoubleTap(e: MotionEvent): Boolean {
+                handleZoom()
+                return true
+            }
+        })
+
+        // Set touch listener on root layout
+        binding.root.setOnTouchListener { _, event ->
+            gestureDetector.onTouchEvent(event)
+            true
         }
     }
 
@@ -116,5 +132,10 @@ class ReadMangaChapter : AppCompatActivity() {
     private fun setupRecyclerView(images: List<String>) {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
         binding.recyclerView.adapter = ImageAdapter(images)
+    }
+
+    private fun handleZoom() {
+        // Implement your zoom logic here
+        Log.d("ReadMangaChapter", "Double-tap detected, handle zoom")
     }
 }
