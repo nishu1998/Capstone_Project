@@ -1,9 +1,12 @@
 package com.mahakalstudio.cosmos
 
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.mahakalstudio.cosmos.databinding.ActivityReadMangaChapterBinding
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -14,6 +17,9 @@ import org.json.JSONObject
 class ReadMangaChapter : AppCompatActivity() {
 
     private lateinit var binding: ActivityReadMangaChapterBinding
+    private lateinit var handler: Handler
+    private lateinit var autoScrollRunnable: Runnable
+    private var isAutoScrolling = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -23,13 +29,42 @@ class ReadMangaChapter : AppCompatActivity() {
         val chapterId = intent.getIntExtra("CHAPTER_ID", 0)
         fetchChapterImages(chapterId)
 
-        binding.floatingActionButton.setOnClickListener(){
+        binding.floatingActionButton.setOnClickListener {
             finish()
         }
 
+        binding.buttonAutoScroll.setOnClickListener {
+            if (isAutoScrolling) {
+                stopAutoScroll()
+            } else {
+                startAutoScroll()
+            }
+        }
+
+        handler = Handler(Looper.getMainLooper())
+        autoScrollRunnable = object : Runnable {
+            override fun run() {
+                val layoutManager = binding.recyclerView.layoutManager as LinearLayoutManager
+                val lastVisibleItemPosition = layoutManager.findLastVisibleItemPosition()
+                if (lastVisibleItemPosition < binding.recyclerView.adapter!!.itemCount - 1) {
+                    binding.recyclerView.smoothScrollToPosition(lastVisibleItemPosition + 1)
+                    handler.postDelayed(this, 2200)
+                }
+            }
+        }
     }
 
+    private fun startAutoScroll() {
+        isAutoScrolling = true
+        binding.buttonAutoScroll.text = "Stop Auto Scroll"
+        handler.post(autoScrollRunnable)
+    }
 
+    private fun stopAutoScroll() {
+        isAutoScrolling = false
+        binding.buttonAutoScroll.text = "Start Auto Scroll"
+        handler.removeCallbacks(autoScrollRunnable)
+    }
 
     private fun fetchChapterImages(chapterId: Int) {
         Log.d("ReadMangaChapter", "Fetching images for Chapter ID: $chapterId")
@@ -60,9 +95,6 @@ class ReadMangaChapter : AppCompatActivity() {
         }.start()
     }
 
-
-
-
     private fun parseImageUrls(responseData: String?): List<String> {
         if (responseData == null) {
             throw JSONException("Response data is null")
@@ -80,7 +112,6 @@ class ReadMangaChapter : AppCompatActivity() {
 
         return imageUrls
     }
-
 
     private fun setupRecyclerView(images: List<String>) {
         binding.recyclerView.layoutManager = LinearLayoutManager(this)
