@@ -8,6 +8,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahakalstudio.cosmos.databinding.ActivityLatestMangaBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import retrofit2.Call
@@ -25,6 +26,8 @@ class LatestManga : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityLatestMangaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         // Setup RecyclerView
         adapter = ItemAdapter(emptyList()) { manga ->

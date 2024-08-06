@@ -7,6 +7,7 @@ import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.bumptech.glide.Glide
 import com.mahakalstudio.cosmos.databinding.ActivityReadWalpaperBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 
 class ReadWalpaper : AppCompatActivity() {
 
@@ -16,6 +17,8 @@ class ReadWalpaper : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityReadWalpaperBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         val wallpaperUrl = intent.getStringExtra("WALLPAPER_URL")
         Log.d("ReadWallpaper", "Wallpaper URL: $wallpaperUrl")

@@ -6,6 +6,7 @@ import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahakalstudio.cosmos.databinding.ActivityFavWalpaperBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 
 class FavWalpaper : AppCompatActivity() {
     private lateinit var binding: ActivityFavWalpaperBinding
@@ -14,6 +15,8 @@ class FavWalpaper : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavWalpaperBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         // Setup RecyclerView
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

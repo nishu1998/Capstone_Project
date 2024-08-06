@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import com.mahakalstudio.cosmos.databinding.ActivityMangaCategoryBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 
 class MangaCategory : AppCompatActivity() {
 
@@ -15,6 +16,8 @@ class MangaCategory : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMangaCategoryBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         // Setup click listeners for the buttons
         binding.A.setOnClickListener {

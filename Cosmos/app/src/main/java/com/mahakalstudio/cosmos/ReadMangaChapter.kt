@@ -9,6 +9,7 @@ import android.view.MotionEvent
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahakalstudio.cosmos.databinding.ActivityReadMangaChapterBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
@@ -27,6 +28,8 @@ class ReadMangaChapter : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityReadMangaChapterBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         val chapterId = intent.getIntExtra("CHAPTER_ID", 0)
         fetchChapterImages(chapterId)

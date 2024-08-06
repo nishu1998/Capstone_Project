@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.mahakalstudio.cosmos.databinding.ActivityReadChaptersBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 
 class ReadChapters : AppCompatActivity() {
 
@@ -14,6 +15,8 @@ class ReadChapters : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityReadChaptersBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         val title = intent.getStringExtra("MANGA_TITLE")
         val chapters = intent.getIntExtra("MANGA_CHAPTERS", 0)

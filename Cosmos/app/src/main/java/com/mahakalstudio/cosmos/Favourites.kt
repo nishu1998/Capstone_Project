@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.core.view.ViewCompat
 import com.mahakalstudio.cosmos.databinding.ActivityFavouritesBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 
 class Favourites : AppCompatActivity() {
 
@@ -14,6 +15,8 @@ class Favourites : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavouritesBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         binding.favMangaButton.setOnClickListener {
             val intent = Intent(this, FavManga::class.java)

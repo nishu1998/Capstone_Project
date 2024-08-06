@@ -11,6 +11,7 @@ import androidx.core.view.ViewCompat
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mahakalstudio.cosmos.databinding.ActivityWallpaperBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -30,6 +31,7 @@ class Wallpaper : AppCompatActivity() {
 
         setupRecyclerView()
         fetchWallpapers()
+        applyBackgroundSetting(this)
 
         // Set the setting button in the after-click state
         binding.messagesTooltip.visibility = View.VISIBLE

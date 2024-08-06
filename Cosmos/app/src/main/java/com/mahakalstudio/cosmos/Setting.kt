@@ -6,10 +6,12 @@ import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
 import android.view.View
+import android.widget.Switch
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.core.view.ViewCompat
 import com.mahakalstudio.cosmos.databinding.ActivitySettingBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 
 class Setting : AppCompatActivity() {
     private lateinit var binding: ActivitySettingBinding
@@ -17,6 +19,8 @@ class Setting : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        applyBackgroundSetting(this)
 
         // Load the theme from SharedPreferences
         sharedPreferences = getSharedPreferences("settings", MODE_PRIVATE)
@@ -36,7 +40,7 @@ class Setting : AppCompatActivity() {
         binding.settingsTooltip.visibility = View.VISIBLE
         ViewCompat.animate(binding.settingsTooltip).scaleX(1f).scaleY(1f).setDuration(300).start()
 
-        // Setup click listeners for the buttons
+        // Setup click listeners for the navigation buttons
         setupClick(binding.homeButton, binding.homeTooltip, MainActivity::class.java)
         setupClick(binding.messagesButton, binding.messagesTooltip, Wallpaper::class.java)
         setupClick(binding.userButton, binding.userTooltip, Favourites::class.java)
@@ -46,6 +50,9 @@ class Setting : AppCompatActivity() {
             sharedPreferences.edit().putBoolean("dark_mode", isChecked).apply()
             restartActivity()
         }
+
+        // Setup listeners for the switch buttons
+        setupSwitchButtons()
     }
 
     private fun restartActivity() {
@@ -66,5 +73,69 @@ class Setting : AppCompatActivity() {
                 finish()
             }
         }
+    }
+
+    private fun setupSwitchButtons() {
+        val switchButtons = listOf(
+            binding.switchButton1,
+            binding.switchButton2,
+            binding.switchButton3
+        )
+
+        switchButtons.forEachIndexed { index, switch ->
+            switch.setOnCheckedChangeListener { _, isChecked ->
+                if (isChecked) {
+                    activateSwitch(index, switchButtons)
+                } else {
+                    deactivateSwitch(index)
+                }
+            }
+        }
+    }
+
+    private fun activateSwitch(index: Int, switches: List<Switch>) {
+        switches.forEachIndexed { i, switch ->
+            switch.isChecked = i == index
+            if (i == index) {
+                // Apply the corresponding functionality for the activated switch
+                applyFunctionality(index, true)
+            }
+        }
+    }
+
+    private fun deactivateSwitch(index: Int) {
+        // Reset the background to default or remove gradient
+        applyFunctionality(index, false)
+    }
+
+    private fun applyFunctionality(index: Int, isActive: Boolean) {
+        val editor = sharedPreferences.edit()
+        if (isActive) {
+            when (index) {
+                0 -> {
+                    // Apply functionality for Switch 1
+                    // Set gradient background
+                    binding.root.setBackgroundResource(R.drawable.gradient)
+                    editor.putInt("background", R.drawable.gradient)
+                }
+                1 -> {
+                    // Apply functionality for Switch 2
+                    // Set gradient background
+                    binding.root.setBackgroundResource(R.drawable.gradient2)
+                    editor.putInt("background", R.drawable.gradient2)
+                }
+                2 -> {
+                    // Apply functionality for Switch 3
+                    // Set gradient background
+                    binding.root.setBackgroundResource(R.drawable.gradient3)
+                    editor.putInt("background", R.drawable.gradient3)
+                }
+            }
+        } else {
+            // Reset to default background when switch is turned off
+            binding.root.setBackgroundResource(android.R.color.background_light) // Use default background resource
+            editor.remove("background")
+        }
+        editor.apply()
     }
 }

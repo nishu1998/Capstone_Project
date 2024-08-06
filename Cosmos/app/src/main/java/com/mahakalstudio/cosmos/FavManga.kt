@@ -9,6 +9,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mahakalstudio.cosmos.databinding.ActivityFavMangaBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 
 class FavManga : AppCompatActivity() {
     private lateinit var binding: ActivityFavMangaBinding
@@ -21,6 +22,8 @@ class FavManga : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityFavMangaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         // Setup RecyclerView
         binding.recyclerView.layoutManager = LinearLayoutManager(this)

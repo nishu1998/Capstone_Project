@@ -15,6 +15,8 @@ import com.mahakalstudio.cosmos.databinding.ActivityMainBinding
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -28,6 +30,8 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         // Initialize RecyclerView adapter with an empty list
         itemAdapter = ItemAdapter(mangaList) { manga ->

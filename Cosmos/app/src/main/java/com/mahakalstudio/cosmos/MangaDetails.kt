@@ -9,6 +9,7 @@ import com.bumptech.glide.Glide
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import com.mahakalstudio.cosmos.databinding.ActivityReadMangaBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 
 class MangaDetails : AppCompatActivity() {
     private lateinit var binding: ActivityReadMangaBinding
@@ -20,6 +21,8 @@ class MangaDetails : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityReadMangaBinding.inflate(layoutInflater)
         setContentView(binding.root)
+
+        applyBackgroundSetting(this)
 
         val title = intent.getStringExtra("MANGA_TITLE")
         val thumb = intent.getStringExtra("MANGA_THUMB")

@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.mahakalstudio.cosmos.databinding.ActivityPopularWallpaperBinding
+import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
@@ -29,6 +30,7 @@ class PopularWallpaper : AppCompatActivity() {
 
         setupRecyclerView()
         fetchWallpapers()
+        applyBackgroundSetting(this)
 
         // Setup click listeners for the buttons
         setupClick(binding.homeButton, MainActivity::class.java)
