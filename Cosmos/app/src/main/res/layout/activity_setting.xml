@@ -37,33 +37,33 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Switch 1"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:text="Theme 1"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:textStyle="bold" />
 
         <Switch
             android:id="@+id/switch_button_2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Switch 2"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:text="Theme 2"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:textStyle="bold" />
 
         <Switch
             android:id="@+id/switch_button_3"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="16dp"
-            android:text="Switch 3"
+            android:background="?attr/selectableItemBackgroundBorderless"
+            android:text="Theme 3"
             android:textAlignment="center"
             android:textSize="20sp"
-            android:textStyle="bold"
-            android:background="?attr/selectableItemBackgroundBorderless" />
+            android:textStyle="bold" />
     </LinearLayout>
 
     <LinearLayout
