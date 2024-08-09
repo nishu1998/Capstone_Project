@@ -115,7 +115,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-        // Show tutorial
         showTutorial()
     }
 
@@ -137,38 +136,54 @@ class MainActivity : AppCompatActivity() {
         val apiInterface = MangaApiObj.apiInterface
 
         // Function to fetch next page
-        apiInterface.getData(page, genres, nsfw, type).enqueue(object : Callback<MangaResponseDataClass> {
-            override fun onResponse(call: Call<MangaResponseDataClass>, response: Response<MangaResponseDataClass>) {
-                progressDialog.dismiss()
-                isLoading = false
-                if (response.isSuccessful) {
-                    val body = response.body()
-                    if (body != null) {
-                        val fetchedManga = body.data
-                        mangaList.addAll(fetchedManga)
-                        itemAdapter.updateData(mangaList)
-                        // Check if there are more results to fetch
-                        if (!fetchedManga.isNullOrEmpty()) {
-                            // Increment page number for next request
-                            page++
+        apiInterface.getData(page, genres, nsfw, type)
+            .enqueue(object : Callback<MangaResponseDataClass> {
+                override fun onResponse(
+                    call: Call<MangaResponseDataClass>,
+                    response: Response<MangaResponseDataClass>
+                ) {
+                    progressDialog.dismiss()
+                    isLoading = false
+                    if (response.isSuccessful) {
+                        val body = response.body()
+                        if (body != null) {
+                            val fetchedManga = body.data
+                            mangaList.addAll(fetchedManga)
+                            itemAdapter.updateData(mangaList)
+                            // Check if there are more results to fetch
+                            if (!fetchedManga.isNullOrEmpty()) {
+                                // Increment page number for next request
+                                page++
+                            }
+                        } else {
+                            Log.d("Main", "Response body is null")
+                            Toast.makeText(
+                                this@MainActivity,
+                                "Response body is null",
+                                Toast.LENGTH_SHORT
+                            ).show()
                         }
                     } else {
-                        Log.d("Main", "Response body is null")
-                        Toast.makeText(this@MainActivity, "Response body is null", Toast.LENGTH_SHORT).show()
+                        Log.d("Main", "API call failed: ${response.code()} - ${response.message()}")
+                        Toast.makeText(
+                            this@MainActivity,
+                            "Failed to fetch manga",
+                            Toast.LENGTH_SHORT
+                        ).show()
                     }
-                } else {
-                    Log.d("Main", "API call failed: ${response.code()} - ${response.message()}")
-                    Toast.makeText(this@MainActivity, "Failed to fetch manga", Toast.LENGTH_SHORT).show()
                 }
-            }
 
-            override fun onFailure(call: Call<MangaResponseDataClass>, t: Throwable) {
-                progressDialog.dismiss()
-                isLoading = false
-                Log.e("Main", "API call failed", t)
-                Toast.makeText(this@MainActivity, "Failed to fetch manga: ${t.localizedMessage}", Toast.LENGTH_SHORT).show()
-            }
-        })
+                override fun onFailure(call: Call<MangaResponseDataClass>, t: Throwable) {
+                    progressDialog.dismiss()
+                    isLoading = false
+                    Log.e("Main", "API call failed", t)
+                    Toast.makeText(
+                        this@MainActivity,
+                        "Failed to fetch manga: ${t.localizedMessage}",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            })
     }
 
     private fun filterManga(query: String) {
@@ -179,50 +194,96 @@ class MainActivity : AppCompatActivity() {
         itemAdapter.filterList(binding.searchView.query.toString(), genreQuery)
     }
 
+    private fun isTutorialShown(): Boolean {
+        val sharedPreferences = getSharedPreferences("app_preferences", MODE_PRIVATE)
+        return sharedPreferences.getBoolean("tutorial_shown", false)
+    }
+
+    private fun setTutorialShown() {
+        val sharedPreferences = getSharedPreferences("app_preferences", MODE_PRIVATE)
+        sharedPreferences.edit().putBoolean("tutorial_shown", true).apply()
+    }
+
     private fun showTutorial() {
-        TapTargetSequence(this)
-            .targets(
-                TapTarget.forView(findViewById(R.id.searchView), "Search View", "Use this to search for manga by name.")
-                    .transparentTarget(true)
-                    .cancelable(false)
-                    .textColor(android.R.color.black) // Set text color
-                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
-                TapTarget.forView(findViewById(R.id.genreSearchView), "Genre Search View", "Use this to search for manga by genre.")
-                    .transparentTarget(true)
-                    .cancelable(false)
-                    .textColor(android.R.color.black) // Set text color
-                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
-                TapTarget.forView(findViewById(R.id.customButton), "Latest Button", "Tap here to view the latest manga.")
-                    .transparentTarget(true)
-                    .cancelable(false)
-                    .textColor(android.R.color.black) // Set text color
-                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
-                TapTarget.forView(findViewById(R.id.button2), "Category Button", "Tap here to view manga categories.")
-                    .transparentTarget(true)
-                    .cancelable(false)
-                    .textColor(android.R.color.black) // Set text color
-                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
-                TapTarget.forView(findViewById(R.id.home_button), "Home Button", "Tap here to return to the home screen.")
-                    .transparentTarget(true)
-                    .cancelable(false)
-                    .textColor(android.R.color.black) // Set text color
-                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
-                TapTarget.forView(findViewById(R.id.messages_button), "Wallpaper Button", "Tap here to view wallpapers.")
-                    .transparentTarget(true)
-                    .cancelable(false)
-                    .textColor(android.R.color.black) // Set text color
-                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
-                TapTarget.forView(findViewById(R.id.user_button), "Favourites Button", "Tap here to view your favourite manga & wallpapers.")
-                    .transparentTarget(true)
-                    .cancelable(false)
-                    .textColor(android.R.color.black) // Set text color
-                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
-                TapTarget.forView(findViewById(R.id.settings_button), "Settings Button", "Tap here to open settings.")
-                    .transparentTarget(true)
-                    .cancelable(false)
-                    .textColor(android.R.color.black) // Set text color
-                    .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
-            )
-            .start()
+        if (!isTutorialShown()) {
+            TapTargetSequence(this)
+                .targets(
+                    TapTarget.forView(
+                        findViewById(R.id.searchView),
+                        "Search View",
+                        "Use this to search for manga by name."
+                    )
+                        .transparentTarget(true)
+                        .cancelable(false)
+                        .textColor(android.R.color.black) // Set text color
+                        .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                    TapTarget.forView(
+                        findViewById(R.id.genreSearchView),
+                        "Genre Search View",
+                        "Use this to search for manga by genre."
+                    )
+                        .transparentTarget(true)
+                        .cancelable(false)
+                        .textColor(android.R.color.black) // Set text color
+                        .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                    TapTarget.forView(
+                        findViewById(R.id.customButton),
+                        "Latest Button",
+                        "Tap here to view the latest manga."
+                    )
+                        .transparentTarget(true)
+                        .cancelable(false)
+                        .textColor(android.R.color.black) // Set text color
+                        .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                    TapTarget.forView(
+                        findViewById(R.id.button2),
+                        "Category Button",
+                        "Tap here to view manga categories."
+                    )
+                        .transparentTarget(true)
+                        .cancelable(false)
+                        .textColor(android.R.color.black) // Set text color
+                        .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                    TapTarget.forView(
+                        findViewById(R.id.home_button),
+                        "Home Button",
+                        "Tap here to return to the home screen."
+                    )
+                        .transparentTarget(true)
+                        .cancelable(false)
+                        .textColor(android.R.color.black) // Set text color
+                        .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                    TapTarget.forView(
+                        findViewById(R.id.messages_button),
+                        "Wallpaper Button",
+                        "Tap here to view wallpapers."
+                    )
+                        .transparentTarget(true)
+                        .cancelable(false)
+                        .textColor(android.R.color.black) // Set text color
+                        .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                    TapTarget.forView(
+                        findViewById(R.id.user_button),
+                        "Favourites Button",
+                        "Tap here to view your favourite manga & wallpapers."
+                    )
+                        .transparentTarget(true)
+                        .cancelable(false)
+                        .textColor(android.R.color.black) // Set text color
+                        .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                    TapTarget.forView(
+                        findViewById(R.id.settings_button),
+                        "Settings Button",
+                        "Tap here to open settings."
+                    )
+                        .transparentTarget(true)
+                        .cancelable(false)
+                        .textColor(android.R.color.black) // Set text color
+                        .textTypeface(Typeface.DEFAULT_BOLD), // Optional: Set text style
+                )
+                .start()
+
+            setTutorialShown()
+        }
     }
 }
