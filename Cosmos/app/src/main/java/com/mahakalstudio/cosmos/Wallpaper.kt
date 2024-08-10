@@ -15,13 +15,14 @@ import com.mahakalstudio.cosmos.utils.applyBackgroundSetting
 import retrofit2.Call
 import retrofit2.Callback
 import retrofit2.Response
+import kotlin.random.Random
 
 class Wallpaper : AppCompatActivity() {
 
     private lateinit var binding: ActivityWallpaperBinding
     private lateinit var wallpaperAdapter: WallpaperAdapter
     private val wallpaperList = mutableListOf<WallpaperData>()
-    private var page = 1
+    private var page: Int = Random.nextInt(1, 21)
     private var isLoading = false
 
     override fun onCreate(savedInstanceState: Bundle?) {

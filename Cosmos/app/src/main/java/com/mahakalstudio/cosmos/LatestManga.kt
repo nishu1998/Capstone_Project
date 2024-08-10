@@ -16,11 +16,13 @@ import retrofit2.Callback
 import retrofit2.Response
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
+import kotlin.random.Random
 
 class LatestManga : AppCompatActivity() {
 
     private lateinit var binding: ActivityLatestMangaBinding
     private lateinit var adapter: ItemAdapter
+    private var page: Int = Random.nextInt(1, 21)
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -87,7 +89,7 @@ class LatestManga : AppCompatActivity() {
 
         val api = retrofit.create(MangaApiInterface::class.java)
 
-        val call = api.getLatestManga(page = 1, genres = "Harem,Fantasy", nsfw = true, type = "all")
+        val call = api.getLatestManga(page = page, genres = "Harem,Fantasy", nsfw = true, type = "all")
 
         call.enqueue(object : Callback<MangaResponseDataClass> {
             override fun onResponse(call: Call<MangaResponseDataClass>, response: Response<MangaResponseDataClass>) {
